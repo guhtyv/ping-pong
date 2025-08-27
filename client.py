@@ -3,7 +3,10 @@ import socket
 import json
 from threading import Thread
 
+
+
 # ---ПУГАМЕ НАЛАШТУВАННЯ ---
+mixer.init()
 WIDTH, HEIGHT = 800, 600
 init()
 screen = display.set_mode((WIDTH, HEIGHT))
@@ -44,8 +47,10 @@ font_main = font.Font(None, 36)
 ball_img = transform.scale(image.load("ball.png"), (20, 20))
 player1_img = transform.scale(image.load("paddle.png"), (20, 100))
 player2_img = transform.scale(image.load("paddle.png"), (20, 100))
+bg_img = transform.scale(image.load("bg.jpg"), (800, 600))
 # --- ЗВУКИ ---
-
+hit_sound = mixer.Sound("jump-1.ogg")
+jump_sound = mixer.Sound("jumpland.ogg")
 # --- ГРА ---
 game_over = False
 winner = None
@@ -90,7 +95,8 @@ while True:
         continue  # Блокує гру після перемоги
 
     if game_state:
-        screen.fill((30, 30, 30))
+        #screen.fill((30, 30, 30))
+        screen.blit(bg_img, (0, 0))
         screen.blit(player1_img, (20, game_state['paddles']['0']))
         screen.blit(player2_img, (WIDTH - 40, game_state['paddles']['1']))
         screen.blit(ball_img, (game_state['ball']['x'], game_state['ball']['y'] - 10))
@@ -99,10 +105,10 @@ while True:
 
         if game_state['sound_event']:
             if game_state['sound_event'] == 'wall_hit':
-                # звук відбиття м'ячика від стін
+                hit_sound.play()    # звук відбиття м'ячика від стін
                 pass
             if game_state['sound_event'] == 'platform_hit':
-                # звук відбиття м'ячика від платформи
+                jump_sound.play()    # звук відбиття м'ячика від платформи
                 pass
 
     else:
