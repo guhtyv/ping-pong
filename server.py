@@ -90,7 +90,7 @@ class GameServer:
                     self.sound_event = 'platform_hit'
 
                 if (self.ball['y'] - self.paddles[0] == 20 or self.ball['y'] == 100 + self.paddles[0]) and self.ball['x'] < 40:
-                    seld.ball['vx'] *= -1
+                    self.ball['vx'] *= -1
                     self.ball['vy'] *= -1
                     self.sound_event = 'platform_hit'
                     
