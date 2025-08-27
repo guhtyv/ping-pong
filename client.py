@@ -92,8 +92,8 @@ while True:
     if game_state:
         screen.fill((30, 30, 30))
         screen.blit(player1_img, (20, game_state['paddles']['0']))
-        screen.blit(player2_img, (20, game_state['paddles']['1']))
-        screen.blit(ball_img, (game_state['ball']['x']-10, game_state['ball']['y']-10))
+        screen.blit(player2_img, (WIDTH - 40, game_state['paddles']['1']))
+        screen.blit(ball_img, (game_state['ball']['x'], game_state['ball']['y'] - 10))
         score_text = font_main.render(f"{game_state['scores'][0]} : {game_state['scores'][1]}", True, (255, 255, 255))
         screen.blit(score_text, (WIDTH // 2 -25, 20))
 
